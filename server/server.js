@@ -4,7 +4,7 @@ var cors = require("cors");
 var app = express();
 
 app.use(cors());
-
+app.use(express.json());
 mongoose.connect(
   "mongodb+srv://animesh:shanky98@contact-ympgf.mongodb.net/<dbname>?retryWrites=true&w=majority",
   { useNewUrlParser: true },
@@ -16,11 +16,9 @@ mongoose.connect(
     }
   }
 );
+const routes = require("./routes");
+app.use("/", routes);
 
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4200;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
